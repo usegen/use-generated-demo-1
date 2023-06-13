@@ -1,0 +1,958 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserCountAggregate {
+  id: Int!
+  email: Int!
+  passwordHash: Int!
+  age: Int!
+  resetToken: Int!
+  roles: Int!
+  _all: Int!
+}
+
+type UserAvgAggregate {
+  id: Float
+}
+
+type UserSumAggregate {
+  id: Int
+}
+
+type UserMinAggregate {
+  id: Int
+  email: String
+  passwordHash: String
+  age: String
+  resetToken: String
+}
+
+type UserMaxAggregate {
+  id: Int
+  email: String
+  passwordHash: String
+  age: String
+  resetToken: String
+}
+
+type UserCount {
+  comments: Int!
+  posts: Int!
+}
+
+type BlogPostCount {
+  comments: Int!
+}
+
+type BlogPost {
+  id: ID!
+  title: String!
+  content: String
+  published: Boolean!
+  authorId: Int
+  author: User
+  comments: [Comment!]
+  _count: BlogPostCount!
+}
+
+type Comment {
+  id: ID!
+  content: String!
+  authorId: Int
+  postId: Int!
+  author: User
+  post: BlogPost!
+}
+
+type User {
+  id: ID!
+  email: String!
+  passwordHash: String!
+  age: String
+  resetToken: String
+  roles: [UserRole!]
+  comments: [Comment!]
+  posts: [BlogPost!]
+  _count: UserCount!
+}
+
+enum UserRole {
+  AuthenticatedUser
+  Admin
+  SuperAdmin
+}
+
+type CommentCountAggregate {
+  id: Int!
+  content: Int!
+  authorId: Int!
+  postId: Int!
+  _all: Int!
+}
+
+type CommentAvgAggregate {
+  id: Float
+  authorId: Float
+  postId: Float
+}
+
+type CommentSumAggregate {
+  id: Int
+  authorId: Int
+  postId: Int
+}
+
+type CommentMinAggregate {
+  id: Int
+  content: String
+  authorId: Int
+  postId: Int
+}
+
+type CommentMaxAggregate {
+  id: Int
+  content: String
+  authorId: Int
+  postId: Int
+}
+
+type BlogPostCountAggregate {
+  id: Int!
+  title: Int!
+  content: Int!
+  published: Int!
+  authorId: Int!
+  _all: Int!
+}
+
+type BlogPostAvgAggregate {
+  id: Float
+  authorId: Float
+}
+
+type BlogPostSumAggregate {
+  id: Int
+  authorId: Int
+}
+
+type BlogPostMinAggregate {
+  id: Int
+  title: String
+  content: String
+  published: Boolean
+  authorId: Int
+}
+
+type BlogPostMaxAggregate {
+  id: Int
+  title: String
+  content: String
+  published: Boolean
+  authorId: Int
+}
+
+type ListMetadata {
+  count: Float!
+}
+
+type ExtendedUser {
+  id: ID
+  email: String
+  passwordHash: String
+  age: String
+  resetToken: String
+  roles: [UserRole!]
+  comments: [Comment!]
+  posts: [BlogPost!]
+  _count: UserCount
+}
+
+type ExtendedBlogPost {
+  id: ID
+  title: String
+  content: String
+  published: Boolean
+  authorId: Int
+  author: User
+  comments: [Comment!]
+  _count: BlogPostCount
+}
+
+type ExtendedComment {
+  id: ID
+  content: String
+  authorId: Int
+  postId: Int
+  author: User
+  post: BlogPost
+}
+
+type Query {
+  allUsers(page: Float = 1, perPage: Float = 10, orderBy: [UserOrderByWithRelationInput!], where: UserWhereInput, nestedArgs: UserNestedArgsStartPoint): [ExtendedUser!]!
+  _allUsersMeta(orderBy: [UserOrderByWithRelationInput!], where: UserWhereInput): ListMetadata!
+  User(id: Int!, nestedArgs: UserNestedArgsStartPoint): ExtendedUser!
+  allBlogPosts(page: Float = 1, perPage: Float = 10, orderBy: [BlogPostOrderByWithRelationInput!], where: BlogPostWhereInput, nestedArgs: BlogPostNestedArgsStartPoint): [ExtendedBlogPost!]!
+  _allBlogPostsMeta(orderBy: [BlogPostOrderByWithRelationInput!], where: BlogPostWhereInput): ListMetadata!
+  BlogPost(id: Int!, nestedArgs: BlogPostNestedArgsStartPoint): ExtendedBlogPost!
+  allComments(page: Float = 1, perPage: Float = 10, orderBy: [CommentOrderByWithRelationInput!], where: CommentWhereInput, nestedArgs: CommentNestedArgsStartPoint): [ExtendedComment!]!
+  _allCommentsMeta(orderBy: [CommentOrderByWithRelationInput!], where: CommentWhereInput): ListMetadata!
+  Comment(id: Int!, nestedArgs: CommentNestedArgsStartPoint): ExtendedComment!
+}
+
+input UserOrderByWithRelationInput {
+  id: SortOrder
+  email: SortOrder
+  passwordHash: SortOrder
+  age: SortOrder
+  resetToken: SortOrder
+  roles: SortOrder
+  comments: CommentOrderByRelationAggregateInput
+  posts: BlogPostOrderByRelationAggregateInput
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input CommentOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input BlogPostOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: IntFilter
+  email: StringFilter
+  passwordHash: StringFilter
+  age: StringNullableFilter
+  resetToken: StringNullableFilter
+  roles: EnumUserRoleNullableListFilter
+  comments: CommentListRelationFilter
+  posts: BlogPostListRelationFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input EnumUserRoleNullableListFilter {
+  equals: [UserRole!]
+  has: UserRole
+  hasEvery: [UserRole!]
+  hasSome: [UserRole!]
+  isEmpty: Boolean
+}
+
+input CommentListRelationFilter {
+  every: CommentWhereInput
+  some: CommentWhereInput
+  none: CommentWhereInput
+}
+
+input CommentWhereInput {
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+  id: IntFilter
+  content: StringFilter
+  authorId: IntNullableFilter
+  postId: IntFilter
+  author: UserRelationFilter
+  post: BlogPostRelationFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+input BlogPostRelationFilter {
+  is: BlogPostWhereInput
+  isNot: BlogPostWhereInput
+}
+
+input BlogPostWhereInput {
+  AND: [BlogPostWhereInput!]
+  OR: [BlogPostWhereInput!]
+  NOT: [BlogPostWhereInput!]
+  id: IntFilter
+  title: StringFilter
+  content: StringNullableFilter
+  published: BoolFilter
+  authorId: IntNullableFilter
+  author: UserRelationFilter
+  comments: CommentListRelationFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input BlogPostListRelationFilter {
+  every: BlogPostWhereInput
+  some: BlogPostWhereInput
+  none: BlogPostWhereInput
+}
+
+input UserNestedArgsStartPoint {
+  comments: CommentNestedArgs0ForUser
+  posts: BlogPostNestedArgs0ForUser
+}
+
+input CommentNestedArgs0ForUser {
+  args: CommentArgsForUser
+}
+
+input CommentArgsForUser {
+  page: Float
+  perPage: Float
+  orderBy: CommentOrderByWithRelationInput
+  where: CommentWhereInput
+}
+
+input CommentOrderByWithRelationInput {
+  id: SortOrder
+  content: SortOrder
+  authorId: SortOrder
+  postId: SortOrder
+  author: UserOrderByWithRelationInput
+  post: BlogPostOrderByWithRelationInput
+}
+
+input BlogPostOrderByWithRelationInput {
+  id: SortOrder
+  title: SortOrder
+  content: SortOrder
+  published: SortOrder
+  authorId: SortOrder
+  author: UserOrderByWithRelationInput
+  comments: CommentOrderByRelationAggregateInput
+}
+
+input BlogPostNestedArgs0ForUser {
+  args: BlogPostArgsForUser
+}
+
+input BlogPostArgsForUser {
+  page: Float
+  perPage: Float
+  orderBy: BlogPostOrderByWithRelationInput
+  where: BlogPostWhereInput
+}
+
+input BlogPostNestedArgsStartPoint {
+  author: UserNestedArgs0ForBlogPost
+  comments: CommentNestedArgs1ForBlogPost
+}
+
+input UserNestedArgs0ForBlogPost {
+  comments: CommentNestedArgs0ForBlogPost
+  posts: BlogPostNestedArgs0ForBlogPost
+}
+
+input CommentNestedArgs0ForBlogPost {
+  args: CommentArgsForBlogPost
+}
+
+input CommentArgsForBlogPost {
+  page: Float
+  perPage: Float
+  orderBy: CommentOrderByWithRelationInput
+  where: CommentWhereInput
+}
+
+input BlogPostNestedArgs0ForBlogPost {
+  args: BlogPostArgsForBlogPost
+}
+
+input BlogPostArgsForBlogPost {
+  page: Float
+  perPage: Float
+  orderBy: BlogPostOrderByWithRelationInput
+  where: BlogPostWhereInput
+}
+
+input CommentNestedArgs1ForBlogPost {
+  args: CommentArgsForBlogPost
+}
+
+input CommentNestedArgsStartPoint {
+  author: UserNestedArgs0ForComment
+  post: BlogPostNestedArgs1ForComment
+}
+
+input UserNestedArgs0ForComment {
+  comments: CommentNestedArgs0ForComment
+  posts: BlogPostNestedArgs0ForComment
+}
+
+input CommentNestedArgs0ForComment {
+  args: CommentArgsForComment
+}
+
+input CommentArgsForComment {
+  page: Float
+  perPage: Float
+  orderBy: CommentOrderByWithRelationInput
+  where: CommentWhereInput
+}
+
+input BlogPostNestedArgs0ForComment {
+  args: BlogPostArgsForComment
+}
+
+input BlogPostArgsForComment {
+  page: Float
+  perPage: Float
+  orderBy: BlogPostOrderByWithRelationInput
+  where: BlogPostWhereInput
+}
+
+input BlogPostNestedArgs1ForComment {
+  comments: CommentNestedArgs1ForComment
+}
+
+input CommentNestedArgs1ForComment {
+  args: CommentArgsForComment
+}
+
+type Mutation {
+  createUser(createInput: UserCreateInput!): User!
+  updateUser(id: Int!, updateInput: UserUpdateInput!): User!
+  deleteUser(id: Int!): User!
+  createBlogPost(createInput: BlogPostCreateInput!): BlogPost!
+  updateBlogPost(id: Int!, updateInput: BlogPostUpdateInput!): BlogPost!
+  deleteBlogPost(id: Int!): BlogPost!
+  createComment(createInput: CommentCreateInput!): Comment!
+  updateComment(id: Int!, updateInput: CommentUpdateInput!): Comment!
+  deleteComment(id: Int!): Comment!
+}
+
+input UserCreateInput {
+  email: String!
+  passwordHash: String!
+  age: String
+  resetToken: String
+  roles: [UserRole!]
+  comments: CommentCreateNestedManyWithoutAuthorInput
+  posts: BlogPostCreateNestedManyWithoutAuthorInput
+}
+
+input CommentCreateNestedManyWithoutAuthorInput {
+  create: [CommentCreateWithoutAuthorInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutAuthorInput!]
+  createMany: CommentCreateManyAuthorInputEnvelope
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutAuthorInput {
+  content: String!
+  post: BlogPostCreateNestedOneWithoutCommentsInput!
+}
+
+input BlogPostCreateNestedOneWithoutCommentsInput {
+  create: BlogPostCreateWithoutCommentsInput
+  connectOrCreate: BlogPostCreateOrConnectWithoutCommentsInput
+  connect: BlogPostWhereUniqueInput
+}
+
+input BlogPostCreateWithoutCommentsInput {
+  title: String!
+  content: String
+  published: Boolean!
+  author: UserCreateNestedOneWithoutPostsInput
+}
+
+input UserCreateNestedOneWithoutPostsInput {
+  create: UserCreateWithoutPostsInput
+  connectOrCreate: UserCreateOrConnectWithoutPostsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutPostsInput {
+  email: String!
+  passwordHash: String!
+  age: String
+  resetToken: String
+  roles: [UserRole!]
+  comments: CommentCreateNestedManyWithoutAuthorInput
+}
+
+input UserCreateOrConnectWithoutPostsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutPostsInput!
+}
+
+input UserWhereUniqueInput {
+  id: Int
+  email: String
+  resetToken: String
+}
+
+input BlogPostCreateOrConnectWithoutCommentsInput {
+  where: BlogPostWhereUniqueInput!
+  create: BlogPostCreateWithoutCommentsInput!
+}
+
+input BlogPostWhereUniqueInput {
+  id: Int
+}
+
+input CommentCreateOrConnectWithoutAuthorInput {
+  where: CommentWhereUniqueInput!
+  create: CommentCreateWithoutAuthorInput!
+}
+
+input CommentWhereUniqueInput {
+  id: Int
+}
+
+input CommentCreateManyAuthorInputEnvelope {
+  data: [CommentCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateManyAuthorInput {
+  id: Int
+  content: String!
+  postId: Int!
+}
+
+input BlogPostCreateNestedManyWithoutAuthorInput {
+  create: [BlogPostCreateWithoutAuthorInput!]
+  connectOrCreate: [BlogPostCreateOrConnectWithoutAuthorInput!]
+  createMany: BlogPostCreateManyAuthorInputEnvelope
+  connect: [BlogPostWhereUniqueInput!]
+}
+
+input BlogPostCreateWithoutAuthorInput {
+  title: String!
+  content: String
+  published: Boolean!
+  comments: CommentCreateNestedManyWithoutPostInput
+}
+
+input CommentCreateNestedManyWithoutPostInput {
+  create: [CommentCreateWithoutPostInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutPostInput!]
+  createMany: CommentCreateManyPostInputEnvelope
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutPostInput {
+  content: String!
+  author: UserCreateNestedOneWithoutCommentsInput
+}
+
+input UserCreateNestedOneWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  connectOrCreate: UserCreateOrConnectWithoutCommentsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCommentsInput {
+  email: String!
+  passwordHash: String!
+  age: String
+  resetToken: String
+  roles: [UserRole!]
+  posts: BlogPostCreateNestedManyWithoutAuthorInput
+}
+
+input UserCreateOrConnectWithoutCommentsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutCommentsInput!
+}
+
+input CommentCreateOrConnectWithoutPostInput {
+  where: CommentWhereUniqueInput!
+  create: CommentCreateWithoutPostInput!
+}
+
+input CommentCreateManyPostInputEnvelope {
+  data: [CommentCreateManyPostInput!]!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateManyPostInput {
+  id: Int
+  content: String!
+  authorId: Int
+}
+
+input BlogPostCreateOrConnectWithoutAuthorInput {
+  where: BlogPostWhereUniqueInput!
+  create: BlogPostCreateWithoutAuthorInput!
+}
+
+input BlogPostCreateManyAuthorInputEnvelope {
+  data: [BlogPostCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
+}
+
+input BlogPostCreateManyAuthorInput {
+  id: Int
+  title: String!
+  content: String
+  published: Boolean!
+}
+
+input UserUpdateInput {
+  email: String
+  passwordHash: String
+  age: String
+  resetToken: String
+  roles: [UserRole!]
+  comments: CommentUpdateManyWithoutAuthorNestedInput
+  posts: BlogPostUpdateManyWithoutAuthorNestedInput
+}
+
+input CommentUpdateManyWithoutAuthorNestedInput {
+  create: [CommentCreateWithoutAuthorInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutAuthorInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutAuthorInput!]
+  createMany: CommentCreateManyAuthorInputEnvelope
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [CommentUpdateManyWithWhereWithoutAuthorInput!]
+  deleteMany: [CommentScalarWhereInput!]
+}
+
+input CommentUpsertWithWhereUniqueWithoutAuthorInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutAuthorInput!
+  create: CommentCreateWithoutAuthorInput!
+}
+
+input CommentUpdateWithoutAuthorInput {
+  content: String
+  post: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
+}
+
+input BlogPostUpdateOneRequiredWithoutCommentsNestedInput {
+  create: BlogPostCreateWithoutCommentsInput
+  connectOrCreate: BlogPostCreateOrConnectWithoutCommentsInput
+  upsert: BlogPostUpsertWithoutCommentsInput
+  connect: BlogPostWhereUniqueInput
+  update: BlogPostUpdateWithoutCommentsInput
+}
+
+input BlogPostUpsertWithoutCommentsInput {
+  update: BlogPostUpdateWithoutCommentsInput!
+  create: BlogPostCreateWithoutCommentsInput!
+}
+
+input BlogPostUpdateWithoutCommentsInput {
+  title: String
+  content: String
+  published: Boolean
+  author: UserUpdateOneWithoutPostsNestedInput
+}
+
+input UserUpdateOneWithoutPostsNestedInput {
+  create: UserCreateWithoutPostsInput
+  connectOrCreate: UserCreateOrConnectWithoutPostsInput
+  upsert: UserUpsertWithoutPostsInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutPostsInput
+}
+
+input UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsInput!
+  create: UserCreateWithoutPostsInput!
+}
+
+input UserUpdateWithoutPostsInput {
+  email: String
+  passwordHash: String
+  age: String
+  resetToken: String
+  roles: [UserRole!]
+  comments: CommentUpdateManyWithoutAuthorNestedInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutAuthorInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutAuthorInput!
+}
+
+input CommentUpdateManyWithWhereWithoutAuthorInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyMutationInput!
+}
+
+input CommentScalarWhereInput {
+  AND: [CommentScalarWhereInput!]
+  OR: [CommentScalarWhereInput!]
+  NOT: [CommentScalarWhereInput!]
+  id: IntFilter
+  content: StringFilter
+  authorId: IntNullableFilter
+  postId: IntFilter
+}
+
+input CommentUpdateManyMutationInput {
+  content: String
+}
+
+input BlogPostUpdateManyWithoutAuthorNestedInput {
+  create: [BlogPostCreateWithoutAuthorInput!]
+  connectOrCreate: [BlogPostCreateOrConnectWithoutAuthorInput!]
+  upsert: [BlogPostUpsertWithWhereUniqueWithoutAuthorInput!]
+  createMany: BlogPostCreateManyAuthorInputEnvelope
+  set: [BlogPostWhereUniqueInput!]
+  disconnect: [BlogPostWhereUniqueInput!]
+  delete: [BlogPostWhereUniqueInput!]
+  connect: [BlogPostWhereUniqueInput!]
+  update: [BlogPostUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [BlogPostUpdateManyWithWhereWithoutAuthorInput!]
+  deleteMany: [BlogPostScalarWhereInput!]
+}
+
+input BlogPostUpsertWithWhereUniqueWithoutAuthorInput {
+  where: BlogPostWhereUniqueInput!
+  update: BlogPostUpdateWithoutAuthorInput!
+  create: BlogPostCreateWithoutAuthorInput!
+}
+
+input BlogPostUpdateWithoutAuthorInput {
+  title: String
+  content: String
+  published: Boolean
+  comments: CommentUpdateManyWithoutPostNestedInput
+}
+
+input CommentUpdateManyWithoutPostNestedInput {
+  create: [CommentCreateWithoutPostInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutPostInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutPostInput!]
+  createMany: CommentCreateManyPostInputEnvelope
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutPostInput!]
+  updateMany: [CommentUpdateManyWithWhereWithoutPostInput!]
+  deleteMany: [CommentScalarWhereInput!]
+}
+
+input CommentUpsertWithWhereUniqueWithoutPostInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutPostInput!
+  create: CommentCreateWithoutPostInput!
+}
+
+input CommentUpdateWithoutPostInput {
+  content: String
+  author: UserUpdateOneWithoutCommentsNestedInput
+}
+
+input UserUpdateOneWithoutCommentsNestedInput {
+  create: UserCreateWithoutCommentsInput
+  connectOrCreate: UserCreateOrConnectWithoutCommentsInput
+  upsert: UserUpsertWithoutCommentsInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutCommentsInput
+}
+
+input UserUpsertWithoutCommentsInput {
+  update: UserUpdateWithoutCommentsInput!
+  create: UserCreateWithoutCommentsInput!
+}
+
+input UserUpdateWithoutCommentsInput {
+  email: String
+  passwordHash: String
+  age: String
+  resetToken: String
+  roles: [UserRole!]
+  posts: BlogPostUpdateManyWithoutAuthorNestedInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutPostInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutPostInput!
+}
+
+input CommentUpdateManyWithWhereWithoutPostInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyMutationInput!
+}
+
+input BlogPostUpdateWithWhereUniqueWithoutAuthorInput {
+  where: BlogPostWhereUniqueInput!
+  data: BlogPostUpdateWithoutAuthorInput!
+}
+
+input BlogPostUpdateManyWithWhereWithoutAuthorInput {
+  where: BlogPostScalarWhereInput!
+  data: BlogPostUpdateManyMutationInput!
+}
+
+input BlogPostScalarWhereInput {
+  AND: [BlogPostScalarWhereInput!]
+  OR: [BlogPostScalarWhereInput!]
+  NOT: [BlogPostScalarWhereInput!]
+  id: IntFilter
+  title: StringFilter
+  content: StringNullableFilter
+  published: BoolFilter
+  authorId: IntNullableFilter
+}
+
+input BlogPostUpdateManyMutationInput {
+  title: String
+  content: String
+  published: Boolean
+}
+
+input BlogPostCreateInput {
+  title: String!
+  content: String
+  published: Boolean!
+  author: UserCreateNestedOneWithoutPostsInput
+  comments: CommentCreateNestedManyWithoutPostInput
+}
+
+input BlogPostUpdateInput {
+  title: String
+  content: String
+  published: Boolean
+  author: UserUpdateOneWithoutPostsNestedInput
+  comments: CommentUpdateManyWithoutPostNestedInput
+}
+
+input CommentCreateInput {
+  content: String!
+  author: UserCreateNestedOneWithoutCommentsInput
+  post: BlogPostCreateNestedOneWithoutCommentsInput!
+}
+
+input CommentUpdateInput {
+  content: String
+  author: UserUpdateOneWithoutCommentsNestedInput
+  post: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
+}

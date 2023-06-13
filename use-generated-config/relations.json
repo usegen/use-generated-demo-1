@@ -1,0 +1,38 @@
+{
+  "BlogPost": [
+    {
+      "fieldName": "author",
+      "modelName": "User",
+      "isList": false
+    },
+    {
+      "fieldName": "comments",
+      "modelName": "Comment",
+      "isList": true
+    }
+  ],
+  "Comment": [
+    {
+      "fieldName": "author",
+      "modelName": "User",
+      "isList": false
+    },
+    {
+      "fieldName": "post",
+      "modelName": "BlogPost",
+      "isList": false
+    }
+  ],
+  "User": [
+    {
+      "fieldName": "comments",
+      "modelName": "Comment",
+      "isList": true
+    },
+    {
+      "fieldName": "posts",
+      "modelName": "BlogPost",
+      "isList": true
+    }
+  ]
+}

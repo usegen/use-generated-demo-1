@@ -2,7 +2,30 @@
   "defaultRequireLogin": true, 
   "createAuthModule":true,
   "defaultQueryDepthLevel":2,
-  "modules": [],
+  "modules": [
+    {
+      "name": "user",
+      "models": [
+        {
+          "name": "User",
+          "queryDepthLevel":1
+        }
+      ]
+    },
+    {
+      "name": "post",
+      "models": [
+        {
+          "queryDepthLevel":2,
+          "name": "BlogPost"
+        },
+        {
+          "name": "Comment",
+          "queryDepthLevel":2
+        } 
+      ]
+    }
+  ],
   "createPrismaModule": true,
   "createCommonTypes":true,
   "createMailTemplates":true

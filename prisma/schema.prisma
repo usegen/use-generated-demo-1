@@ -17,5 +17,40 @@ generator nestgraphql {
   output             = "../src/@generated"
 }
 
+model BlogPost {
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean
+  authorId  Int?
+  author    User?     @relation(fields: [authorId], references: [id])
+  comments  Comment[]
+}
 
+model Comment {
+  id       Int      @id @default(autoincrement())
+  content  String
+  authorId Int?
+  author   User?    @relation(fields: [authorId], references: [id])
+  postId   Int
+  post     BlogPost @relation(fields: [postId], references: [id])
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  passwordHash String
+  age          String?
+  resetToken   String?    @unique
+  roles        UserRole[]
+  comments     Comment[]
+  posts        BlogPost[]
+
+}
+
+enum UserRole {
+  AuthenticatedUser
+  Admin
+  SuperAdmin
+}
 
